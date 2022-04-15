@@ -1,0 +1,28 @@
+name: Mark stale issues and pull requests
+
+on:
+  schedule:
+    - cron: "13 2 * * *"
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 54 # default 60
+          days-before-close: 7 # default 7
+          stale-issue-message:
+            "This issue hasn't seen any activity recently. We close inactive issues after 60 days to manage the volume of issues
+            we receive. If we missed this issue or you want to keep it open, please reply here or remove the stale label. That
+            will reset the timer and allow more time for this issue to be addressed before it is closed"
+          stale-pr-message:
+            "This pull request hasn't seen any activity recently. We close inactive pull requests after 60 days to manage the
+            volume of pull requests we receive. If we missed this pull request or you want to keep it open, please reply here or
+            remove the stale label. That will reset the timer and allow more time for this pull request to be addressed before it
+            is closed"
