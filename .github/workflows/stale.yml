@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "13 2 * * *"
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   stale:
     runs-on: ubuntu-latest
@@ -12,7 +16,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/stale@v8
+      - uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           days-before-stale: 54 # default 60
